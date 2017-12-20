@@ -8,6 +8,9 @@ default:: all
 all::
 	@(cd base && ([ -f Makefile ] || ./standard_configure.sh ${READLINE_OPT} --with-macports-user=${USER} --prefix=${PREFIX}) && ${MAKE} all)
 
+revert::
+	@(cd base && git clean -fdx && git reset --hard)
+
 install:: all
 	@(cd base && ${SUDO} ${MAKE} install)
 	@if egrep -q ^rsync ${SRCS}; then \
