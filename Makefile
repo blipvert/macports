@@ -1,11 +1,12 @@
 PREFIX=	/opt/local
 SRCS=	${PREFIX}/etc/macports/sources.conf
 SUDO=	sudo
+READLINE_OPT=--enable-readline
 
 default:: all
 
 all::
-	@(cd base && ([ -f Makefile ] || ./standard_configure.sh --prefix=${PREFIX}) && ${MAKE} all)
+	@(cd base && ([ -f Makefile ] || ./standard_configure.sh ${READLINE_OPT} --with-macports-user=${USER} --prefix=${PREFIX}) && ${MAKE} all)
 
 install:: all
 	@(cd base && ${SUDO} ${MAKE} install)
