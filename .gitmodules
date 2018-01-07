@@ -1,0 +1,6 @@
+[submodule "base"]
+	path = base
+	url = ../macports-base.git
+[submodule "dports"]
+	path = dports
+	url = ../macports-ports.git
