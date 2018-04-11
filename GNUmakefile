@@ -24,8 +24,8 @@ index:
 	(cd dports && portindex && \
 		cp PortIndex PortIndex.quick $(HOME)/.macports$(CURDIR)/dports)
 
-clean:
-	@(cd base && ([ ! -f Makefile ] || $(MAKE) clean))
+clean distclean:
+	@(cd base && ([ ! -f Makefile ] || $(MAKE) $@))
 
 push:
 	git push github master origin/trunk:trunk
@@ -33,4 +33,4 @@ push:
 revert:
 	@(cd base && git clean -fdx && git reset --hard)
 
-.PHONY: default all install selfupdate index clean push revert
+.PHONY: default all install selfupdate index clean distclean push revert
