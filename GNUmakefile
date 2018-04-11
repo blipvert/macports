@@ -9,13 +9,20 @@ default: all
 all:
 	@(cd base && ([ -f Makefile ] || ./standard_configure.sh $(READLINE_OPT) --with-macports-user=$(USER) --prefix=$(PREFIX)) && $(MAKE) all)
 
-install: all
-	@(cd base && $(SUDO) $(MAKE) install)
+install: all installasroot
+
+ifeq ($(strip $(shell id -u)),0)
+installasroot:
+	@(cd base && $(MAKE) install)
 	@if egrep -q ^rsync $(SRCS); then \
 	  echo file://`pwd`/dports/ [default] >> $(SRCS); \
 	  sed -i .orig -e 's/^rsync/#rsync/' $(SRCS); \
 	  echo "$(SRCS) automatically configured"; \
         fi
+else
+installasroot:
+	$(SUDO) $(MAKE) installasroot
+endif
 
 selfupdate: install index
 
