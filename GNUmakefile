@@ -1,8 +1,7 @@
 PREFIX := /opt/local
 SRCS := $(PREFIX)/etc/macports/sources.conf
 SUDO := sudo
-#READLINE_OPT := --enable-readline
-READLINE_OPT :=
+READLINE_OPT := --enable-readline
 
 default: all
 
